@@ -21,6 +21,9 @@ jobs:
           hugo-version: 'latest'
           # extended: true
 
+      - name: Clean public
+        run: rm -rf public/*
+
       - name: Build
         run: hugo --minify
 
@@ -28,5 +31,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
           publish_branch: master
           force_orphan: true
