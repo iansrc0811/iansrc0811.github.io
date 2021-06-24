@@ -34,3 +34,4 @@ jobs:
           publish_dir: ./public
           publish_branch: master
           force_orphan: true
+# https://dwye.dev/post/hugo-github-action/
