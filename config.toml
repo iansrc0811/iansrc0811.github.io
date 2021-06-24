@@ -1,8 +1,8 @@
 ##########################################
 # 站點配置
 
-baseURL = "https://example.com/"
-title = "Hugo 主題 MemE"
+baseURL = "https://www.ian-ye.com/"
+title = "Ian's 筆記"
 languageCode = "zh-TW"
 hasCJKLanguage = true
 # 版權資訊（支援 Markdown）
@@ -92,17 +92,17 @@ uglyURLs = false
 # 作者資訊
 [author]
     # 名字
-    name = "reuixiy"
+    name = "ian-yeh"
     # 郵箱
-    email = "reuixiy@gmail.com"
+    email = "iansrc0811@gmail.com"
     # 座右銘或簡介
-    motto = "Viva La Vida"
+    motto = ""
     # 頭像
     avatar = "/icons/apple-touch-icon.png"
     # 網站（預設值：baseURL）
-    website = "https://io-oi.me/"
+    website = "https://ian-ye.com/"
     # 推特
-    twitter = "reuixiy"
+    twitter = "ian_yei"
 
 # 相關文章
 [related]
@@ -334,16 +334,16 @@ uglyURLs = false
     # 說明：用於 JSON-LD、Open Graph
 
     # 站點的描述
-    siteDescription = "MemE 是一個強大且可高度定製的 GoHugo 部落格主題，專為個人部落格設計。"
+    siteDescription = "一個技術筆記"
     # 說明：用於 HTML 的頭部元資料、JSON-LD、
     #      Open Graph、Atom、RSS
 
     # 站點的建立時間
-    siteCreatedTime = "1969-07-20T20:17:43+00:00"
+    siteCreatedTime = "2021-06-24T23:03:00+08:00"
     # 注意：請保持此格式，更改數字
 
     # 站點的推特帳號
-    siteTwitter = "reuixiy"
+    siteTwitter = "ian_yei"
     # 說明：用於 Twitter Cards
 
 
@@ -531,7 +531,7 @@ uglyURLs = false
 
     jsonLD = true
     openGraph = true
-    twitterCards = true
+    twitterCards = false
     # 注意：如果你設定 twitterCards 為 `true`，
     #      請務必開啟 openGraph。否則，網頁的
     #      Twitter Cards 資訊將會不完整。
