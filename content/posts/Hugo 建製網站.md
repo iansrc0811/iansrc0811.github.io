@@ -12,9 +12,13 @@ draft: false
 
 進入目錄 (ian_blog)
 
-在 root 建立 `CNAME` file
+~~在 root 建立 `CNAME` file~~
 
-裡面存我要的 domain `www.ian-ye.com`
+~~裡面存我要的 domain `www.ian-ye.com`~~
+
+如果不是自動佈署的話要自己加 CNAME 在 root
+
+這邊 CNAME 要寫在設定檔中(見「自動佈署」)
 
 ## 自動佈署
 
@@ -24,7 +28,7 @@ draft: false
 
 `.github/workflows/gh-pages.yml`
 
-```yaml
+```jsx
 name: github pages
 
 on:
@@ -61,6 +65,7 @@ jobs:
           publish_dir: ./public
           publish_branch: master
           force_orphan: true
+					cname: 'www.ian-ye.com' # 佈署時會產生 CNAME 檔
 # https://dwye.dev/post/hugo-github-action/
 ```
 
@@ -71,6 +76,40 @@ jobs:
 # meme theme
 
 [https://themes.gohugo.io/hugo-theme-meme/](https://themes.gohugo.io/hugo-theme-meme/)
+
+## 改 Favicon
+
+![https://i.imgur.com/zdScqd9.png](https://i.imgur.com/zdScqd9.png)
+
+就是那個小圖示
+
+找要想要的圖片，然後前往 `[https://realfavicongenerator.net/](https://realfavicongenerator.net/)` 生成相關圖示和檔案，下
+
+載後解壓
+
+僅保留
+
+- android-chrome-512x512.png
+- apple-touch-icon.png
+- mstile-150x150.png
+- safari-pinned-tab.svg
+- favicon.ico
+- site.webmanifest
+
+這些檔案，刪除其餘。
+
+然後將這些檔案移動到 `static/icons/` 目錄下，
+
+再將
+
+- favicon.ico
+- site.webmanifest 移動到
+
+`static/` 目錄下，
+
+最後將 site.webmanifest 重新命名為 `manifest.json`
+
+並檢查和修改相關內容
 
 ### 自動部署 Github page
 
