@@ -4,10 +4,9 @@ date: 2021-06-25T10:47:00+08:00
 draft: false
 subtitle: 介紹一下 Hugo 這個靜態網站框架
 tags:
-  - hugo
-  - blog
+  - HUGO
 categories:
-  - hugo
+  - HUGO
 ---
 終於弄好了自己的 blog~~  
 比較幾個靜態網頁的框架，最後選擇了 Hugo  
