@@ -33,6 +33,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: master
-          cname: 'www.ian-ye.com'
+          cname: 'www.ian-yeh.com'
           force_orphan: true
 # https://dwye.dev/post/hugo-github-action/
