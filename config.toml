@@ -1232,7 +1232,7 @@ uglyURLs = false
     displayPoweredBy = true
 
     # 是否顯示站點的版權資訊
-    displaySiteCopyright = true
+    displaySiteCopyright = false
 
     # 自定義頁尾（支援 Markdown）
     customFooter = ""
