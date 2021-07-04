@@ -133,7 +133,7 @@ jobs:
           publish_dir: ./public
           publish_branch: master
           force_orphan: true
-          cname: 'www.ian-ye.com' # 佈署時會產生 CNAME 檔
+          cname: 'www.ian-yeh.com' # 佈署時會產生 CNAME 檔
 # https://dwye.dev/post/hugo-github-action/
 ```
 

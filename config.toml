@@ -1,7 +1,7 @@
 ##########################################
 # 站點配置
 
-baseURL = "https://www.ian-ye.com/"
+baseURL = "https://www.ian-yeh.com/"
 title = "Ian's 筆記"
 languageCode = "zh-TW"
 hasCJKLanguage = true
@@ -100,7 +100,7 @@ uglyURLs = false
     # 頭像
     avatar = "/icons/apple-touch-icon.png"
     # 網站（預設值：baseURL）
-    website = "https://ian-ye.com/"
+    website = "https://ian-yeh.com/"
     # 推特
     twitter = "ian_yei"
 
