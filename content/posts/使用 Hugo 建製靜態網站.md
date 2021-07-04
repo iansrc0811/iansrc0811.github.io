@@ -2,7 +2,7 @@
 title: "使用 Hugo 建製靜態網站"
 date: 2021-06-25T10:47:00+08:00
 draft: false
-subtitle: 介紹一下 Hugo 這個靜態網站框架
+description: 介紹一下 Hugo 這個靜態網站框架
 tags:
   - HUGO
 categories:
