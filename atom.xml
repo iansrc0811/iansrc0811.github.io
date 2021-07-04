@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-TW"><title type="text">Ian's 筆記</title><subtitle type="html">一個前後端技術筆記，包含 Rails、Vue.js 和一些實用的知職分享</subtitle><updated>2021-07-04T10:18:30+00:00</updated><id>https://www.ian-yeh.com/</id><link rel="alternate" type="text/html" href="https://www.ian-yeh.com/"/><link rel="self" type="application/atom+xml" href="https://www.ian-yeh.com/atom.xml"/><author><name>ian-yeh</name><uri>https://www.ian-yeh.com/</uri><email>iansrc0811@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><generator uri="https://gohugo.io/" version="0.84.4">Hugo</generator><entry><title type="text">在 Apple M1 上安裝 mysql2 gem</title><link rel="alternate" type="text/html" href="https://www.ian-yeh.com/posts/%E5%9C%A8-apple-m1-%E4%B8%8A%E5%AE%89%E8%A3%9D-mysql2-gem/"/><id>https://www.ian-yeh.com/posts/%E5%9C%A8-apple-m1-%E4%B8%8A%E5%AE%89%E8%A3%9D-mysql2-gem/</id><updated>2021-07-04T10:18:29+00:00</updated><published>2021-07-04T17:09:25+08:00</published><author><name>ian-yeh</name><uri>https://ian-yeh.com/</uri><email>iansrc0811@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">mysql2 gem 無法安裝的解決方法</summary><content type="html">&lt;p>最近操新建 rails project 遇到 bundle 到 mysql 會過不了&lt;/p>
+&lt;p>有一行錯誤訊息是&lt;/p>
+&lt;p>&lt;code>ld: library not found for -lzstd&lt;/code>&lt;/p>
+&lt;h2 id="解決方法">解決方法&lt;/h2>
+&lt;p>找到 &lt;code>zstd&lt;/code> 的路徑&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">brew install zstd &lt;span class="c1"># 如果沒安裝過的話要安裝&lt;/span>
+which zstd
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>最後找到的 &lt;code>zstd&lt;/code> 的路徑會是像這樣&lt;/p>
+&lt;p>&lt;code>/opt/homebrew/Cellar/zstd/1.5.0/lib&lt;/code>&lt;/p>
+&lt;p>BTW 如果你是從 intel 晶片 Mac 移轉到 M1 Mac 的話，&lt;br>
+兩個晶片版本下的 Homebrew 路徑是不一樣的，最好在移轉後重新安裝一次 Homebrew 並重新安裝所有套件&lt;/p>
+&lt;p>到專案目錄下&lt;/p>
+&lt;p>&lt;code>bundle config --local build.mysql2 &amp;quot;--with-opt-dir=&amp;quot;$(brew --prefix openssl) --with-ldflags=-L/opt/homebrew/Cellar/zstd/1.5.0/lib&amp;quot;&amp;quot;&lt;/code>&lt;/p>
+&lt;p>再 &lt;code>bundle&lt;/code>&lt;/p>
+&lt;p>就完成安裝 mysql2 gem 了&lt;/p>
+&lt;h2 id="參考">參考&lt;/h2>
+&lt;p>&lt;a href="https://stackoverflow.com/questions/67840691/ld-library-not-found-for-lzstd-while-bundle-install-for-mysql2-gem-ruby-on-mac">https://stackoverflow.com/questions/67840691/ld-library-not-found-for-lzstd-while-bundle-install-for-mysql2-gem-ruby-on-mac&lt;/a>&lt;/p></content><category scheme="https://www.ian-yeh.com/categories/rails/" term="Rails" label="Rails"/><category scheme="https://www.ian-yeh.com/tags/rails/" term="Rails" label="Rails"/><category scheme="https://www.ian-yeh.com/tags/m1/" term="M1" label="M1"/></entry><entry><title type="text">解決 Apple M1 開 Spotify 黑畫面</title><link rel="alternate" type="text/html" href="https://www.ian-yeh.com/posts/%E8%A7%A3%E6%B1%BA-apple-m1-%E9%96%8B-spotify-%E9%BB%91%E7%95%AB%E9%9D%A2/"/><id>https://www.ian-yeh.com/posts/%E8%A7%A3%E6%B1%BA-apple-m1-%E9%96%8B-spotify-%E9%BB%91%E7%95%AB%E9%9D%A2/</id><updated>2021-07-04T10:18:29+00:00</updated><published>2021-06-29T15:02:09+08:00</published><author><name>ian-yeh</name><uri>https://ian-yeh.com/</uri><email>iansrc0811@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">如果你的新 M1 MacBook Pro / Air 安裝 Spotify 後打開是黑畫面， 打開你的 Spotify App，右鍵按下顯示套件內容 接著……</summary><content type="html">&lt;p>如果你的新 M1 MacBook Pro / Air 安裝 Spotify 後打開是黑畫面，&lt;br>
+打開你的 Spotify App，右鍵按下顯示套件內容&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/ekPe53S.png" alt="Image">&lt;/p>
+&lt;p>接著在這個資料夾裡面找到 &lt;code>zh-Hant.mo&lt;/code> 這個檔案&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/h78bv7j.png" alt="Image">&lt;/p>
+&lt;p>將檔名改成 &lt;code>zh-TW.mo&lt;/code> 後，Spotify 就可以打開了&lt;/p>
+&lt;h3 id="參考網址">參考網址&lt;/h3>
+&lt;p>&lt;a href="https://myptt.cc/article/MAC/M.1605871681.A.598">[求救] MacBook Air 2020 Spotify開啟黑畫面&lt;/a>&lt;/p></content><category scheme="https://www.ian-yeh.com/categories/mac/" term="Mac" label="Mac"/><category scheme="https://www.ian-yeh.com/tags/mac/" term="MAC" label="MAC"/><category scheme="https://www.ian-yeh.com/tags/m1/" term="M1" label="M1"/></entry><entry><title type="text">使用 Hugo 建製靜態網站</title><link rel="alternate" type="text/html" href="https://www.ian-yeh.com/posts/%E4%BD%BF%E7%94%A8-hugo-%E5%BB%BA%E8%A3%BD%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/"/><id>https://www.ian-yeh.com/posts/%E4%BD%BF%E7%94%A8-hugo-%E5%BB%BA%E8%A3%BD%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/</id><updated>2021-07-04T10:18:29+00:00</updated><published>2021-06-25T10:47:00+08:00</published><author><name>ian-yeh</name><uri>https://ian-yeh.com/</uri><email>iansrc0811@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">介紹一下 Hugo 這個靜態網站框架</summary><content type="html">&lt;p>終於弄好了自己的 blog~~&lt;br>
+比較幾個靜態網頁的框架，最後選擇了 Hugo&lt;br>
+以下就說明一下怎麼安裝囉&lt;/p>
+&lt;h2 id="安裝">安裝&lt;/h2>
+&lt;p>&lt;a href="https://gohugo.io/getting-started/quick-start/">參考 Hugo 官網&lt;/a>&lt;/p>
+&lt;h3 id="安裝只要用-homebrew-就可以安裝">安裝只要用 Homebrew 就可以安裝&lt;/h3>
+&lt;p>&lt;code>brew install hugo&lt;/code>&lt;/p>
+&lt;h3 id="在想要的目錄下建立-hugo-專案">在想要的目錄下建立 Hugo 專案&lt;/h3>
+&lt;p>&lt;code>hugo new site new_blog&lt;/code>&lt;/p>
+&lt;h3 id="安裝主題">安裝主題&lt;/h3>
+&lt;p>我使用的是 &lt;a href="https://themes.gohugo.io/hugo-theme-meme/">Meme&lt;/a>&lt;br>
+進到剛剛建立的 folder 中 (new_blog)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">git init
+git submodule add --depth &lt;span class="m">1&lt;/span> https://github.com/reuixiy/hugo-theme-meme.git themes/meme
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>補充說明:&lt;/p>
+&lt;p>有一個主要的設定需要複製到 &lt;code>themes&lt;/code> 資料夾之外&lt;/p>
+&lt;p>&lt;code>rm config.toml &amp;amp;&amp;amp; cp themes/meme/config-examples/zh-tw/config.toml config.toml&lt;/code>&lt;/p>
+&lt;p>其餘較細結設定可參考 &lt;a href="https://themes.gohugo.io/hugo-theme-meme/">Meme 官網&lt;/a>，不同的主題也會有不同的設定方式&lt;br>
+在試這些設定也是滿好玩的&lt;/p>
+&lt;p>安裝主題這邊可能比較困惑的點是，在 &lt;code>themes&lt;/code> 資料夾中會有一個 &lt;code>exampleSite&lt;/code>&lt;br>
+這個可以不必理會&lt;/p>
+&lt;p>還有一些設定檔也應該要搬到 &lt;code>themes&lt;/code> 之外的地方做設定，&lt;br>
+只要知道不應該去修改 &lt;code>themes&lt;/code> 中的設定，設定應該都要在 &lt;code>themes&lt;/code> 以外的地方&lt;/p>
+&lt;h2 id="發佈新文章">發佈新文章&lt;/h2>
+&lt;p>&lt;code>hugo new &amp;quot;posts/new post.md&amp;quot;&lt;/code>&lt;/p>
+&lt;p>會產生 &lt;code>new post&lt;/code> 這個 .md 檔&lt;br>
+內容如下&lt;/p>
+&lt;pre>&lt;code class="language-marddown" data-lang="marddown">---
+title: &amp;quot;My First Post&amp;quot;
+date: 2019-03-26T08:47:11+01:00
+draft: true
+---
+&lt;/code>&lt;/pre>&lt;p>這個設定是可以客製化的，可以新增很多 key&lt;br>
+詳細可以參考 &lt;a href="https://gohugo.io/content-management/front-matter/">Hugo 官網的 front-matter&lt;/a>&lt;br>
+這個是每個文章的開頭格式，接下來才是自己要寫的內容。&lt;/p>
+&lt;p>記得 draft 要改成 false 才能在網頁上看得到文章&lt;br>
+但是在 local 開機的時候 draft false 也會顯示&lt;/p>
+&lt;h2 id="在本地開啟">在本地開啟&lt;/h2>
+&lt;p>最後只要&lt;br>
+&lt;code>hugo server -D&lt;/code>&lt;br>
+就可以在瀏覽器打開頁面了
+不得不說 Hugo 的編譯速度真的很快💯&lt;/p>
+&lt;h2 id="自定網域">自定網域&lt;/h2>
+&lt;p>由於可能會想用自己的 domain 而不是 Github Page 預設的網址，&lt;/p>
+&lt;p>所以會需要在 &lt;a href="https://www.namecheap.com/">Namecheam&lt;/a> 等網站設定 CNAME，&lt;br>
+然後要在專案 root 建立一個名叫 &lt;code>CNAME&lt;/code> 的檔案&lt;br>
+裡面只需要存網域名 &lt;code>www.CUSTOMER_DOMAIN.XXX&lt;/code>&lt;/p>
+&lt;p>但如果跟我一樣用 github action 自動部屬，就可以略過此步驟，見下一段說明&lt;/p>
+&lt;h2 id="自動佈署">自動佈署&lt;/h2>
+&lt;p>這樣的設定讓我只要推 development branch，Github 就會佈署一個版本到 master&lt;/p>
+&lt;p>會先編好一個靜態資源到 public 資料夾下&lt;/p>
+&lt;p>&lt;code>.github/workflows/gh-pages.yml&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">github pages&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">development &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Set a branch to deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">pull_request&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-20.04&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">submodules&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Fetch Hugo themes (true OR recursive)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># fetch-depth: 1 # Fetch all history for .GitInfo and .Lastmod&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup Hugo&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-hugo@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">hugo-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;latest&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># extended: true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Clean public&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">rm -rf public/*&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Build&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">hugo --minify&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-gh-pages@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">github_token&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.GITHUB_TOKEN }}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_dir&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">./public&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_branch&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">master&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">force_orphan&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">cname&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;www.ian-yeh.com&amp;#39;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 佈署時會產生 CNAME 檔&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="c"># https://dwye.dev/post/hugo-github-action/&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="改-favicon">改 Favicon&lt;/h2>
+&lt;p>&lt;img src="https://i.imgur.com/zdScqd9.png" alt="https://i.imgur.com/zdScqd9.png">&lt;/p>
+&lt;p>(就是那個小圖示)&lt;/p>
+&lt;p>找要想要的圖片，然後前往 &lt;a href="https://realfavicongenerator.net/">https://realfavicongenerator.net/&lt;/a> 生成相關圖示和檔案，&lt;br>
+下載後解壓&lt;/p>
+&lt;p>僅保留&lt;/p>
+&lt;ul>
+&lt;li>android-chrome-512x512.png&lt;/li>
+&lt;li>apple-touch-icon.png&lt;/li>
+&lt;li>mstile-150x150.png&lt;/li>
+&lt;li>safari-pinned-tab.svg&lt;/li>
+&lt;li>favicon.ico&lt;/li>
+&lt;li>site.webmanifest&lt;/li>
+&lt;/ul>
+&lt;p>這些檔案，刪除其他的&lt;br>
+然後將這些檔案移動到 &lt;code>static/icons/&lt;/code> 目錄下，&lt;/p>
+&lt;p>再將&lt;/p>
+&lt;ul>
+&lt;li>favicon.ico&lt;/li>
+&lt;li>site.webmanifest&lt;/li>
+&lt;/ul>
+&lt;p>移動到 &lt;code>static/&lt;/code> 目錄下，&lt;/p>
+&lt;p>最後將 site.webmanifest 重新命名為 &lt;code>manifest.json&lt;/code>&lt;/p>
+&lt;p>並檢查和修改相關內容&lt;/p>
+&lt;h2 id="參考">參考&lt;/h2>
+&lt;p>&lt;a href="https://www.notion.so/41cebe4eb9190a5c5e879fee5933beb1">https://gist.github.com/lisez/41cebe4eb9190a5c5e879fee5933beb1&lt;/a>&lt;br>
+&lt;a href="https://dwye.dev/post/hugo-github-action/">https://dwye.dev/post/hugo-github-action/&lt;/a>&lt;br>
+&lt;a href="https://kaiiiz.github.io/blog/hugo-with-github-actions/">https://kaiiiz.github.io/blog/hugo-with-github-actions/&lt;/a>&lt;/p></content><category scheme="https://www.ian-yeh.com/categories/hugo/" term="HUGO" label="HUGO"/><category scheme="https://www.ian-yeh.com/tags/hugo/" term="HUGO" label="HUGO"/></entry></feed>
