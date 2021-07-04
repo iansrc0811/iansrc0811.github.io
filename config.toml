@@ -334,7 +334,7 @@ uglyURLs = false
     # 說明：用於 JSON-LD、Open Graph
 
     # 站點的描述
-    siteDescription = "一個技術筆記"
+    siteDescription = "一個前後端技術筆記，包含 Rails、Vue.js 和一些實用的知職分享"
     # 說明：用於 HTML 的頭部元資料、JSON-LD、
     #      Open Graph、Atom、RSS
 
@@ -794,7 +794,7 @@ uglyURLs = false
     # 文章目錄
 
     # 是否開啟（全域性設定）
-    enableTOC = false
+    enableTOC = true
     # 說明：文章的 Front Matter 中的 `toc`
     #      的優先順序高於此處
 

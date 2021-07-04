@@ -13,21 +13,27 @@ categories:
 以下就說明一下怎麼安裝囉
 
 ## 安裝
+
 [參考 Hugo 官網](https://gohugo.io/getting-started/quick-start/)
 
-### 安裝只要用 Homebrew 就可以安裝  
+### 安裝只要用 Homebrew 就可以安裝
+
 `brew install hugo`
 
-### 在想要的目錄下建立 Hugo 專案  
+### 在想要的目錄下建立 Hugo 專案
+
 `hugo new site new_blog`
 
 ### 安裝主題
+
 我使用的是 [Meme](https://themes.gohugo.io/hugo-theme-meme/)  
 進到剛剛建立的 folder 中 (new_blog)
-```
+
+```bash
 git init
 git submodule add --depth 1 https://github.com/reuixiy/hugo-theme-meme.git themes/meme
 ```
+
 補充說明:
 
 有一個主要的設定需要複製到 `themes` 資料夾之外
@@ -43,7 +49,7 @@ git submodule add --depth 1 https://github.com/reuixiy/hugo-theme-meme.git theme
 還有一些設定檔也應該要搬到 `themes` 之外的地方做設定，  
 只要知道不應該去修改 `themes` 中的設定，設定應該都要在 `themes` 以外的地方
 
-### 發佈新文章
+## 發佈新文章
 
 `hugo new "posts/new post.md"`
 
@@ -57,6 +63,7 @@ date: 2019-03-26T08:47:11+01:00
 draft: true
 ---
 ```
+
 這個設定是可以客製化的，可以新增很多 key  
 詳細可以參考 [Hugo 官網的 front-matter](https://gohugo.io/content-management/front-matter/)  
 這個是每個文章的開頭格式，接下來才是自己要寫的內容。
@@ -64,7 +71,7 @@ draft: true
 記得 draft 要改成 false 才能在網頁上看得到文章  
 但是在 local 開機的時候 draft false 也會顯示
 
-### 在本地開啟
+## 在本地開啟
 
 最後只要  
 `hugo server -D`  
@@ -72,6 +79,7 @@ draft: true
 不得不說 Hugo 的編譯速度真的很快💯
 
 ## 自定網域
+
 由於可能會想用自己的 domain 而不是 Github Page 預設的網址，
 
 所以會需要在 [Namecheam](https://www.namecheap.com/) 等網站設定 CNAME，  
@@ -79,7 +87,7 @@ draft: true
 裡面只需要存網域名 `www.CUSTOMER_DOMAIN.XXX`
 
 但如果跟我一樣用 github action 自動部屬，就可以略過此步驟，見下一段說明
-`
+
 ## 自動佈署
 
 這樣的設定讓我只要推 development branch，Github 就會佈署一個版本到 master
@@ -88,7 +96,7 @@ draft: true
 
 `.github/workflows/gh-pages.yml`
 
-```jsx
+```yaml
 name: github pages
 
 on:
@@ -125,7 +133,7 @@ jobs:
           publish_dir: ./public
           publish_branch: master
           force_orphan: true
-					cname: 'www.ian-ye.com' # 佈署時會產生 CNAME 檔
+          cname: 'www.ian-ye.com' # 佈署時會產生 CNAME 檔
 # https://dwye.dev/post/hugo-github-action/
 ```
 
@@ -161,7 +169,7 @@ jobs:
 
 並檢查和修改相關內容
 
-### 參考
+## 參考
 
 [https://gist.github.com/lisez/41cebe4eb9190a5c5e879fee5933beb1](https://www.notion.so/41cebe4eb9190a5c5e879fee5933beb1)  
 [https://dwye.dev/post/hugo-github-action/](https://dwye.dev/post/hugo-github-action/)  
