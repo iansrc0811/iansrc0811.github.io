@@ -11,7 +11,7 @@ categories:
   - Rails
 ---
 
-最近操新建 rails project 遇到 bundle 到 mysql 會過不了
+最近新建 rails project 遇到 bundle 到 mysql 會過不了
 
 有一行錯誤訊息是
 

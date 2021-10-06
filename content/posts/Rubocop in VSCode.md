@@ -4,10 +4,10 @@ date: 2021-08-08T01:42:13+08:00
 draft: false
 description: 在 vscode 中自動套用 ruby linter - rubocop
 tags:
-  - Railse
+  - Rails
   - rubocop
 categories:
-  - Railse
+  - Rails
 ---
 
 首先在 Gemfile 安裝 rubocop
