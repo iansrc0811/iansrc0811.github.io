@@ -18,7 +18,7 @@ categories:
 
 在專案根目錄建立 `.rubocop.yml`
 
-內容可以參考[這篇]([https://gist.github.com/jhass/a5ae80d87f18e53e7b56](https://gist.github.com/jhass/a5ae80d87f18e53e7b56))
+內容可以參考[這篇](https://gist.github.com/jhass/a5ae80d87f18e53e7b56)
 
 vscode 可能會出現這樣的 warning:
 
