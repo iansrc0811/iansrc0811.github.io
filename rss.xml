@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Ian's 筆記</title><link>https://www.ian-yeh.com/</link><description>一個前後端技術筆記，包含 Rails、Vue.js 和一些實用的知職分享</description><generator>Hugo 0.113.0 https://gohugo.io/</generator><language>zh-TW</language><managingEditor>iansrc0811@gmail.com (ian-yeh)</managingEditor><webMaster>iansrc0811@gmail.com (ian-yeh)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Mon, 12 Jun 2023 10:35:32 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://www.ian-yeh.com/rss.xml"/><item><title>雙子星路由器設定 Port Fowarding</title><link>https://www.ian-yeh.com/posts/%E9%9B%99%E5%AD%90%E6%98%9F%E8%B7%AF%E7%94%B1%E5%99%A8%E8%A8%AD%E5%AE%9A-port-fowarding/</link><guid isPermaLink="true">https://www.ian-yeh.com/posts/%E9%9B%99%E5%AD%90%E6%98%9F%E8%B7%AF%E7%94%B1%E5%99%A8%E8%A8%AD%E5%AE%9A-port-fowarding/</guid><pubDate>Mon, 12 Jun 2023 18:21:32 +0800</pubDate><author>iansrc0811@gmail.com (ian-yeh)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>需要先連線至內部網路，可以是 wifi 或是有線連接。在內網才能進入雙子星的後台設定&lt;/p>
+&lt;p>雙子星 192.168.0.1
+帳號 admin
+密碼 password&lt;/p>
+&lt;p>進入登入頁面: 192.168.0.1&lt;/p>
+&lt;p>&lt;img src="https://www.ian-yeh.com/%E9%9B%99%E5%AD%90%E6%98%9F%E8%B7%AF%E7%94%B1%E5%99%A8%E8%A8%AD%E5%AE%9A/Untitled.png" alt="Untitled">&lt;/p>
+&lt;p>選擇防火牆 → Forwarding&lt;/p>
+&lt;p>圖中為已設定好的資訊，以下重新說明一次&lt;/p>
+&lt;p>網路配置:&lt;/p>
+&lt;p>雙子星路由器 → 三台 Deco X25 分別在二三五樓，使用基地台模式(預設為路由器模式)，都接線至四樓的雙子星路由器。&lt;/p>
+&lt;p>關於基地台模式和路由器模式 &lt;a href="https://www.tp-link.com/tw/support/faq/442/">https://www.tp-link.com/tw/support/faq/442/&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://www.ian-yeh.com/%E9%9B%99%E5%AD%90%E6%98%9F%E8%B7%AF%E7%94%B1%E5%99%A8%E8%A8%AD%E5%AE%9A/Untitled%201.png" alt="Untitled">&lt;/p>
+&lt;p>這樣的好處是所有的路由器都是有線，同時還有 Mesh 功能。缺點就是一開始比較麻煩需要請人接線。&lt;/p>
+&lt;p>首先取得 NAS 目前的內網 IP, 在 Forwarding 設定上會使用到&lt;/p>
+&lt;p>&lt;img src="https://www.ian-yeh.com/%E9%9B%99%E5%AD%90%E6%98%9F%E8%B7%AF%E7%94%B1%E5%99%A8%E8%A8%AD%E5%AE%9A/%E6%88%AA%E5%9C%96_2021-10-29_%E4%B8%8B%E5%8D%889.38.46.png" alt="截圖 2021-10-29 下午9.38.46.png">&lt;/p>
+&lt;p>&lt;img src="https://www.ian-yeh.com/%E9%9B%99%E5%AD%90%E6%98%9F%E8%B7%AF%E7%94%B1%E5%99%A8%E8%A8%AD%E5%AE%9A/%E6%88%AA%E5%9C%96_2021-10-29_%E4%B8%8B%E5%8D%889.42.33.png" alt="截圖 2021-10-29 下午9.42.33.png">&lt;/p>
+&lt;p>以我的例子來說，是192.168.0.16&lt;/p>
+&lt;p>接下來進入主題: 設定 forwarding&lt;/p>
+&lt;p>左邊選單選擇「防火牆」，選則 Forwarding 分頁，並按下新增&lt;/p>
+&lt;p>&lt;img src="https://www.ian-yeh.com/%E9%9B%99%E5%AD%90%E6%98%9F%E8%B7%AF%E7%94%B1%E5%99%A8%E8%A8%AD%E5%AE%9A/Untitled%202.png" alt="Untitled">&lt;/p>
+&lt;p>所以有幾個需要填入的資訊
+名稱、通訊協定、Public Port、Private Port、IP&lt;/p>
+&lt;p>根據&lt;a href="https://kb.synology.com/zh-tw/SRM/tutorial/What_network_ports_are_used_by_SRM_services">官網提供的埠號&lt;/a>，我需要檔案傳輸功能中的 AFP 類型，埠號是 548&lt;/p>
+&lt;p>&lt;img src="https://www.ian-yeh.com/%E9%9B%99%E5%AD%90%E6%98%9F%E8%B7%AF%E7%94%B1%E5%99%A8%E8%A8%AD%E5%AE%9A/Untitled%203.png" alt="Untitled">&lt;/p>
+&lt;p>設定頁面中的「常用應用」並沒有我想要的 548 埠，TCP 的選項，所以就留著不選。&lt;/p>
+&lt;p>名稱可是只自己看的&lt;/p>
+&lt;p>通訊埠，根據官網資訊，需要選 'TCP'&lt;/p>
+&lt;p>Public Port 範圍(別的機器可能叫外部連接埠)，這邊是需要填範圍，我兩個都填入 548&lt;/p>
+&lt;p>Private Port 範圍(別的機器可能叫內部連接埠)，這邊只要一個填，填入 548&lt;/p>
+&lt;p>IP，就是我們的 NAS 的內部 IP，剛剛已取得，填入 192.168.0.16&lt;/p>
+&lt;p>補充說明，Private Port 和 Public Port 在沒有特別需求時可以填一樣，&lt;/p>
+&lt;p>如果有多個 NAS 都需要 548 這個埠號時，可以設定兩個 Forwarding，分別給不同的 Public Port，和機器的 IP，但 Private Port 是一樣的，用不同的對外 Port 達到連線多台 NAS 的功能。&lt;/p>
+&lt;p>到這裡就設定完了，完成的設定會是這樣:&lt;/p>
+&lt;p>&lt;img src="https://www.ian-yeh.com/%E9%9B%99%E5%AD%90%E6%98%9F%E8%B7%AF%E7%94%B1%E5%99%A8%E8%A8%AD%E5%AE%9A/Untitled%204.png" alt="Untitled">&lt;/p>
+&lt;h2 id="參考">參考&lt;/h2>
+&lt;p>&lt;a href="https://ningselect.com/30752/58/">https://ningselect.com/30752/58/&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://macuknow.com/2017/03/18/1485/%E6%95%99%E5%AD%B8-%E4%BA%BA%E5%9C%A8%E5%A4%96%E9%9D%A2%E4%B9%9F%E5%8F%AF%E4%BB%A5%E7%94%A8-finder-%E5%BF%AB%E9%80%9F%E9%80%A3%E5%9B%9E%E5%AE%B6%E4%B8%AD-nas/">https://macuknow.com/2017/03/18/1485/教學-人在外面也可以用-finder-快速連回家中-nas/&lt;/a>&lt;/p></description><category domain="https://www.ian-yeh.com/categories/others/">Others</category><category domain="https://www.ian-yeh.com/tags/port-fowarding/">Port Fowarding</category></item><item><title>在 Docker 安裝 imagemagick</title><link>https://www.ian-yeh.com/posts/docker-imagemagick/</link><guid isPermaLink="true">https://www.ian-yeh.com/posts/docker-imagemagick/</guid><pubDate>Mon, 12 Jun 2023 16:43:45 +0800</pubDate><author>iansrc0811@gmail.com (ian-yeh)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>在 Docker 安裝 imagemagick&lt;/p>
+&lt;p>種種因素，找不到適合的 imagemagick, 最後用下載 binary 的方式安裝&lt;/p>
+&lt;p>參考&lt;a href="https://imagemagick.org/script/install-source.php">官網&lt;/a>&lt;/p>
+&lt;p>下載 tar 的壓縮檔，解壓縮後，執行 configure, make, make install&lt;br>
+最後再刪掉下載的檔案就完成了&lt;/p>
+&lt;p>Dockerfile 中安裝 imagemagick 的部分如下。版本可以自行修改&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">Run wget -c &amp;lt;https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-8.tar.gz&amp;gt; -O - &lt;span class="p">|&lt;/span> tar -xz &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="nb">cd&lt;/span> ImageMagick-7.1.1-8 &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> ./configure &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> make &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> make install &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> ldconfig /usr/local/lib &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="nb">cd&lt;/span> .. &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> rm -rf ImageMagick-7.1.1-8/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>裝完發現還會有 &lt;code>no decode delegate error&lt;/code> 的問題，以致於不能進行圖片的壓縮等操作&lt;/p>
+&lt;p>所以還需要在安裝套件的步驟中，加入下面的指令&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">apt-get update -qq &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> apt-get install -yq libpng-dev libjpeg-dev
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description><category domain="https://www.ian-yeh.com/categories/docker/">Docker</category><category domain="https://www.ian-yeh.com/tags/docker/">Docker</category><category domain="https://www.ian-yeh.com/tags/imagemagick/">imagemagick</category></item><item><title>解決 Rails Console 貼上大量資料會很慢</title><link>https://www.ian-yeh.com/posts/rails-console-works-slowly/</link><guid isPermaLink="true">https://www.ian-yeh.com/posts/rails-console-works-slowly/</guid><pubDate>Mon, 12 Jun 2023 12:25:39 +0800</pubDate><author>iansrc0811@gmail.com (ian-yeh)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>結論: &lt;code>rails console -- --nomultiline&lt;/code>&lt;/p>
+&lt;p>有時候在 Rails Console 要貼上大量資料時，會發現貼上去的速度很慢&lt;/p>
+&lt;p>這時候可以這樣解決&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">rails console -- --nomultiline
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description><category domain="https://www.ian-yeh.com/categories/rails/">Rails</category><category domain="https://www.ian-yeh.com/tags/rails/">Rails</category></item><item><title>Rubocop in VSCode</title><link>https://www.ian-yeh.com/posts/rubocop-in-vscode/</link><guid isPermaLink="true">https://www.ian-yeh.com/posts/rubocop-in-vscode/</guid><pubDate>Sun, 08 Aug 2021 01:42:13 +0800</pubDate><author>iansrc0811@gmail.com (ian-yeh)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>首先在 Gemfile 安裝 rubocop&lt;/p>
+&lt;p>&lt;code>gem 'rubocop', '~&amp;gt; 1.18', require: false&lt;/code>&lt;/p>
+&lt;p>下 &lt;code>bundle install&lt;/code> 安裝&lt;/p>
+&lt;p>在專案根目錄建立 &lt;code>.rubocop.yml&lt;/code>&lt;/p>
+&lt;p>內容可以參考&lt;a href="https://gist.github.com/jhass/a5ae80d87f18e53e7b56">這篇&lt;/a>&lt;/p>
+&lt;p>vscode 可能會出現這樣的 warning:&lt;/p>
+&lt;pre tabindex="0">&lt;code>The following cops were added to RuboCop,
+but are not configured. Please set Enabled to either `true` or `false` in your `.rubocop.yml` file.
+Please also note that can also opt-in to new cops by default by
+adding this to your config: AllCops: NewCops: enable
+Gemspec/DateAssignment: # (new in 1.10) Enabled: true
+Layout/LineEndStringConcatenationIndentation: # (new in 1.18) Enabled: true
+....
+&lt;/code>&lt;/pre>&lt;p>官方有&lt;a href="https://docs.rubocop.org/rubocop/0.85/versioning.html">一篇文章&lt;/a>說明這個原因&lt;/p>
+&lt;p>意思是指在新版的 rubocop 有新增加的規則，但在 rubocop.yml 中沒有明確指示是否 enable&lt;/p>
+&lt;p>解法是可以在 rubocop.yml 中加上這行&lt;/p>
+&lt;p>&lt;code>AllCops: NewCops: enable&lt;/code>&lt;/p>
+&lt;p>代表說之後的新規則都預設打開&lt;/p>
+&lt;p>或者也可以根據 warning 中的每一條規則都加進 rubocop.yml 中去做設定&lt;/p>
+&lt;p>最終我的 rubocop.yml 是長這樣&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt"> 10
+&lt;/span>&lt;span class="lnt"> 11
+&lt;/span>&lt;span class="lnt"> 12
+&lt;/span>&lt;span class="lnt"> 13
+&lt;/span>&lt;span class="lnt"> 14
+&lt;/span>&lt;span class="lnt"> 15
+&lt;/span>&lt;span class="lnt"> 16
+&lt;/span>&lt;span class="lnt"> 17
+&lt;/span>&lt;span class="lnt"> 18
+&lt;/span>&lt;span class="lnt"> 19
+&lt;/span>&lt;span class="lnt"> 20
+&lt;/span>&lt;span class="lnt"> 21
+&lt;/span>&lt;span class="lnt"> 22
+&lt;/span>&lt;span class="lnt"> 23
+&lt;/span>&lt;span class="lnt"> 24
+&lt;/span>&lt;span class="lnt"> 25
+&lt;/span>&lt;span class="lnt"> 26
+&lt;/span>&lt;span class="lnt"> 27
+&lt;/span>&lt;span class="lnt"> 28
+&lt;/span>&lt;span class="lnt"> 29
+&lt;/span>&lt;span class="lnt"> 30
+&lt;/span>&lt;span class="lnt"> 31
+&lt;/span>&lt;span class="lnt"> 32
+&lt;/span>&lt;span class="lnt"> 33
+&lt;/span>&lt;span class="lnt"> 34
+&lt;/span>&lt;span class="lnt"> 35
+&lt;/span>&lt;span class="lnt"> 36
+&lt;/span>&lt;span class="lnt"> 37
+&lt;/span>&lt;span class="lnt"> 38
+&lt;/span>&lt;span class="lnt"> 39
+&lt;/span>&lt;span class="lnt"> 40
+&lt;/span>&lt;span class="lnt"> 41
+&lt;/span>&lt;span class="lnt"> 42
+&lt;/span>&lt;span class="lnt"> 43
+&lt;/span>&lt;span class="lnt"> 44
+&lt;/span>&lt;span class="lnt"> 45
+&lt;/span>&lt;span class="lnt"> 46
+&lt;/span>&lt;span class="lnt"> 47
+&lt;/span>&lt;span class="lnt"> 48
+&lt;/span>&lt;span class="lnt"> 49
+&lt;/span>&lt;span class="lnt"> 50
+&lt;/span>&lt;span class="lnt"> 51
+&lt;/span>&lt;span class="lnt"> 52
+&lt;/span>&lt;span class="lnt"> 53
+&lt;/span>&lt;span class="lnt"> 54
+&lt;/span>&lt;span class="lnt"> 55
+&lt;/span>&lt;span class="lnt"> 56
+&lt;/span>&lt;span class="lnt"> 57
+&lt;/span>&lt;span class="lnt"> 58
+&lt;/span>&lt;span class="lnt"> 59
+&lt;/span>&lt;span class="lnt"> 60
+&lt;/span>&lt;span class="lnt"> 61
+&lt;/span>&lt;span class="lnt"> 62
+&lt;/span>&lt;span class="lnt"> 63
+&lt;/span>&lt;span class="lnt"> 64
+&lt;/span>&lt;span class="lnt"> 65
+&lt;/span>&lt;span class="lnt"> 66
+&lt;/span>&lt;span class="lnt"> 67
+&lt;/span>&lt;span class="lnt"> 68
+&lt;/span>&lt;span class="lnt"> 69
+&lt;/span>&lt;span class="lnt"> 70
+&lt;/span>&lt;span class="lnt"> 71
+&lt;/span>&lt;span class="lnt"> 72
+&lt;/span>&lt;span class="lnt"> 73
+&lt;/span>&lt;span class="lnt"> 74
+&lt;/span>&lt;span class="lnt"> 75
+&lt;/span>&lt;span class="lnt"> 76
+&lt;/span>&lt;span class="lnt"> 77
+&lt;/span>&lt;span class="lnt"> 78
+&lt;/span>&lt;span class="lnt"> 79
+&lt;/span>&lt;span class="lnt"> 80
+&lt;/span>&lt;span class="lnt"> 81
+&lt;/span>&lt;span class="lnt"> 82
+&lt;/span>&lt;span class="lnt"> 83
+&lt;/span>&lt;span class="lnt"> 84
+&lt;/span>&lt;span class="lnt"> 85
+&lt;/span>&lt;span class="lnt"> 86
+&lt;/span>&lt;span class="lnt"> 87
+&lt;/span>&lt;span class="lnt"> 88
+&lt;/span>&lt;span class="lnt"> 89
+&lt;/span>&lt;span class="lnt"> 90
+&lt;/span>&lt;span class="lnt"> 91
+&lt;/span>&lt;span class="lnt"> 92
+&lt;/span>&lt;span class="lnt"> 93
+&lt;/span>&lt;span class="lnt"> 94
+&lt;/span>&lt;span class="lnt"> 95
+&lt;/span>&lt;span class="lnt"> 96
+&lt;/span>&lt;span class="lnt"> 97
+&lt;/span>&lt;span class="lnt"> 98
+&lt;/span>&lt;span class="lnt"> 99
+&lt;/span>&lt;span class="lnt">100
+&lt;/span>&lt;span class="lnt">101
+&lt;/span>&lt;span class="lnt">102
+&lt;/span>&lt;span class="lnt">103
+&lt;/span>&lt;span class="lnt">104
+&lt;/span>&lt;span class="lnt">105
+&lt;/span>&lt;span class="lnt">106
+&lt;/span>&lt;span class="lnt">107
+&lt;/span>&lt;span class="lnt">108
+&lt;/span>&lt;span class="lnt">109
+&lt;/span>&lt;span class="lnt">110
+&lt;/span>&lt;span class="lnt">111
+&lt;/span>&lt;span class="lnt">112
+&lt;/span>&lt;span class="lnt">113
+&lt;/span>&lt;span class="lnt">114
+&lt;/span>&lt;span class="lnt">115
+&lt;/span>&lt;span class="lnt">116
+&lt;/span>&lt;span class="lnt">117
+&lt;/span>&lt;span class="lnt">118
+&lt;/span>&lt;span class="lnt">119
+&lt;/span>&lt;span class="lnt">120
+&lt;/span>&lt;span class="lnt">121
+&lt;/span>&lt;span class="lnt">122
+&lt;/span>&lt;span class="lnt">123
+&lt;/span>&lt;span class="lnt">124
+&lt;/span>&lt;span class="lnt">125
+&lt;/span>&lt;span class="lnt">126
+&lt;/span>&lt;span class="lnt">127
+&lt;/span>&lt;span class="lnt">128
+&lt;/span>&lt;span class="lnt">129
+&lt;/span>&lt;span class="lnt">130
+&lt;/span>&lt;span class="lnt">131
+&lt;/span>&lt;span class="lnt">132
+&lt;/span>&lt;span class="lnt">133
+&lt;/span>&lt;span class="lnt">134
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">AllCops&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">NewCops&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">enable&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># Commonly used screens these days easily fit more than 80 characters.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Layout/LineLength&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Max&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">120&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># Too short methods lead to extraction of single-use methods, which can make&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># the code easier to read (by naming things), but can also clutter the class&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Metrics/MethodLength&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Max&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">20&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># The guiding principle of classes is SRP, SRP can&amp;#39;t be accurately measured by LoC&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Metrics/ClassLength&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Max&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">1500&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># No space makes the method definition shorter and differentiates&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># from a regular assignment.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Layout/SpaceAroundEqualsInParameterDefault&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">EnforcedStyle&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">no_space&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># Single quotes being faster is hardly measurable and only affects parse time.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># Enforcing double quotes reduces the times where you need to change them&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># when introducing an interpolation. Use single quotes only if their semantics&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># are needed.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Style/StringLiterals&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">EnforcedStyle&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">double_quotes&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># We do not need to support Ruby 1.9, so this is good to use.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Style/SymbolArray&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Enabled&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># Most readable form.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Layout/HashAlignment&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">EnforcedHashRocketStyle&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">table&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">EnforcedColonStyle&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">table&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># Mixing the styles looks just silly.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Style/HashSyntax&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">EnforcedStyle&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ruby19_no_mixed_keys&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># has_key? and has_value? are far more readable than key? and value?&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Style/PreferredHashMethods&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Enabled&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># String#% is by far the least verbose and only object oriented variant.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Style/FormatString&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">EnforcedStyle&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">percent&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Style/CollectionMethods&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Enabled&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">PreferredMethods&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="c"># inject seems more common in the community.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">reduce&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;inject&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># Either allow this style or don&amp;#39;t. Marking it as safe with parenthesis&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># is silly. Let&amp;#39;s try to live without them for now.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Style/ParenthesesAroundCondition&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">AllowSafeAssignment&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Lint/AssignmentInCondition&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">AllowSafeAssignment&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># A specialized exception class will take one or more arguments and construct the message from it.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># So both variants make sense.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Style/RaiseArgs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Enabled&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># Indenting the chained dots beneath each other is not supported by this cop,&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># see https://github.com/bbatsov/rubocop/issues/1633&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Layout/MultilineOperationIndentation&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Enabled&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># Fail is an alias of raise. Avoid aliases, it&amp;#39;s more cognitive load for no gain.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># The argument that fail should be used to abort the program is wrong too,&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># there&amp;#39;s Kernel#abort for that.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Style/SignalException&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">EnforcedStyle&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">only_raise&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># Suppressing exceptions can be perfectly fine, and be it to avoid to&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># explicitly type nil into the rescue since that&amp;#39;s what you want to return,&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># or suppressing LoadError for optional dependencies&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Lint/SuppressedException&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Enabled&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Layout/SpaceInsideBlockBraces&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="c"># The space here provides no real gain in readability while consuming&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="c"># horizontal space that could be used for a better parameter name.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="c"># Also {| differentiates better from a hash than { | does.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">SpaceBeforeBlockParameters&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># No trailing space differentiates better from the block:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># foo} means hash, foo } means block.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Layout/SpaceInsideHashLiteralBraces&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">EnforcedStyle&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">no_space&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># { ... } for multi-line blocks is okay, follow Weirichs rule instead:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># https://web.archive.org/web/20140221124509/http://onestepback.org/index.cgi/Tech/Ruby/BraceVsDoEnd.rdoc&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Style/BlockDelimiters&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Enabled&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># do / end blocks should be used for side effects,&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># methods that run a block for side effects and have&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># a useful return value are rare, assign the return&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># value to a local variable for those cases.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Style/MethodCalledOnDoEndBlock&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Enabled&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># Enforcing the names of variables? To single letter ones? Just no.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Style/SingleLineBlockParams&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Enabled&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># Shadowing outer local variables with block parameters is often useful&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># to not reinvent a new name for the same thing, it highlights the relation&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># between the outer variable and the parameter. The cases where it&amp;#39;s actually&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># confusing are rare, and usually bad for other reasons already, for example&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># because the method is too long.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Lint/ShadowingOuterLocalVariable&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Enabled&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># Check with yard instead.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Style/Documentation&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Enabled&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># This is just silly. Calling the argument `other` in all cases makes no sense.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Naming/BinaryOperatorParameterName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Enabled&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># There are valid cases, for example debugging Cucumber steps,&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># also they&amp;#39;ll fail CI anyway&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Lint/Debugger&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Enabled&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># Style preference&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">Style/MethodDefParentheses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Enabled&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>最後在設定檔 settings.json 中加入&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;#34;editor.formatOnSave&amp;#34;: &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">&amp;#34;ruby.format&amp;#34;: &lt;/span>&lt;span class="s2">&amp;#34;rubocop&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">&amp;#34;ruby.rubocop.executePath&amp;#34;: &lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">&amp;#34;ruby.rubocop.onSave&amp;#34;: &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>就可以完成在每次存檔時自動修正&lt;/p></description><category domain="https://www.ian-yeh.com/categories/rails/">Rails</category><category domain="https://www.ian-yeh.com/tags/rails/">Rails</category><category domain="https://www.ian-yeh.com/tags/rubocop/">rubocop</category></item><item><title>在 Apple M1 上安裝 mysql2 gem</title><link>https://www.ian-yeh.com/posts/%E5%9C%A8-apple-m1-%E4%B8%8A%E5%AE%89%E8%A3%9D-mysql2-gem/</link><guid isPermaLink="true">https://www.ian-yeh.com/posts/%E5%9C%A8-apple-m1-%E4%B8%8A%E5%AE%89%E8%A3%9D-mysql2-gem/</guid><pubDate>Sun, 04 Jul 2021 17:09:25 +0800</pubDate><author>iansrc0811@gmail.com (ian-yeh)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>最近新建 rails project 遇到 bundle 到 mysql 會過不了&lt;/p>
+&lt;p>有一行錯誤訊息是&lt;/p>
+&lt;p>&lt;code>ld: library not found for -lzstd&lt;/code>&lt;/p>
+&lt;h2 id="解決方法">解決方法&lt;/h2>
+&lt;p>找到 &lt;code>zstd&lt;/code> 的路徑&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">brew install zstd &lt;span class="c1"># 如果沒安裝過的話要安裝&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">which zstd
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>最後找到的 &lt;code>zstd&lt;/code> 的路徑會是像這樣&lt;/p>
+&lt;p>&lt;code>/opt/homebrew/Cellar/zstd/1.5.0/lib&lt;/code>&lt;/p>
+&lt;p>BTW 如果你是從 intel 晶片 Mac 移轉到 M1 Mac 的話，&lt;br>
+兩個晶片版本下的 Homebrew 路徑是不一樣的，最好在移轉後重新安裝一次 Homebrew 並重新安裝所有套件&lt;/p>
+&lt;p>到專案目錄下&lt;/p>
+&lt;p>&lt;code>bundle config --local build.mysql2 &amp;quot;--with-opt-dir=&amp;quot;$(brew --prefix openssl) --with-ldflags=-L/opt/homebrew/Cellar/zstd/1.5.0/lib&amp;quot;&amp;quot;&lt;/code>&lt;/p>
+&lt;p>再 &lt;code>bundle&lt;/code>&lt;/p>
+&lt;p>就完成安裝 mysql2 gem 了&lt;/p>
+&lt;h3 id="更新">更新&lt;/h3>
+&lt;p>上面的解法的電腦環境是從原本的 intel 晶片的機器移轉到 ARM 晶片的 M1 MacBook Pro&lt;br>
+之後在全新的 M1 上又遇到安裝 mysql gem 的 bug&lt;br>
+主要的差別是 brew 的安裝路徑不一樣，如果是從舊版 Intel 點對點轉資料到 M1 的機器上，可能會有一些潛在的問題&lt;/p>
+&lt;p>如果可以的話，拿到 ARM 晶片的機器最好是重新安裝而不是點對點轉移。
+後來是用另一個解法，在兩台 M1 機器上不同的 project 試過預到安裝問題都成功解決
+前提是你的 mysql 是用 brew 安裝&lt;/p>
+&lt;p>請根據不同的 gem 版本和 mysql 在 homebrew 中的安全路徑調整這個指令，應該可以正常解決(希望)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">gem install mysql2 -v &lt;span class="s1">&amp;#39;0.5.3&amp;#39;&lt;/span> -- &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span>--with-mysql-lib&lt;span class="o">=&lt;/span>/opt/homebrew/Cellar/mysql/8.0.26/lib &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span>--with-mysql-dir&lt;span class="o">=&lt;/span>/opt/homebrew/Cellar/mysql/8.0.26 &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span>--with-mysql-config&lt;span class="o">=&lt;/span>/opt/homebrew/Cellar/mysql/8.0.26/bin/mysql_config &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span>--with-mysql-include&lt;span class="o">=&lt;/span>/opt/homebrew/Cellar/mysql/8.0.26/include
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="參考">參考&lt;/h2>
+&lt;p>&lt;a href="https://stackoverflow.com/questions/67840691/ld-library-not-found-for-lzstd-while-bundle-install-for-mysql2-gem-ruby-on-mac">https://stackoverflow.com/questions/67840691/ld-library-not-found-for-lzstd-while-bundle-install-for-mysql2-gem-ruby-on-mac&lt;/a>&lt;/p></description><category domain="https://www.ian-yeh.com/categories/rails/">Rails</category><category domain="https://www.ian-yeh.com/tags/rails/">Rails</category><category domain="https://www.ian-yeh.com/tags/m1/">M1</category></item><item><title>解決 Apple M1 開 Spotify 黑畫面</title><link>https://www.ian-yeh.com/posts/%E8%A7%A3%E6%B1%BA-apple-m1-%E9%96%8B-spotify-%E9%BB%91%E7%95%AB%E9%9D%A2/</link><guid isPermaLink="true">https://www.ian-yeh.com/posts/%E8%A7%A3%E6%B1%BA-apple-m1-%E9%96%8B-spotify-%E9%BB%91%E7%95%AB%E9%9D%A2/</guid><pubDate>Tue, 29 Jun 2021 15:02:09 +0800</pubDate><author>iansrc0811@gmail.com (ian-yeh)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>如果你的新 M1 MacBook Pro / Air 安裝 Spotify 後打開是黑畫面，&lt;br>
+打開你的 Spotify App，右鍵按下顯示套件內容&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/ekPe53S.png" alt="Image">&lt;/p>
+&lt;p>接著在這個資料夾裡面找到 &lt;code>zh-Hant.mo&lt;/code> 這個檔案&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/h78bv7j.png" alt="Image">&lt;/p>
+&lt;p>將檔名改成 &lt;code>zh-TW.mo&lt;/code> 後，Spotify 就可以打開了&lt;/p>
+&lt;h3 id="參考網址">參考網址&lt;/h3>
+&lt;p>&lt;a href="https://myptt.cc/article/MAC/M.1605871681.A.598">[求救] MacBook Air 2020 Spotify開啟黑畫面&lt;/a>&lt;/p></description><category domain="https://www.ian-yeh.com/categories/mac/">Mac</category><category domain="https://www.ian-yeh.com/tags/mac/">MAC</category><category domain="https://www.ian-yeh.com/tags/m1/">M1</category></item><item><title>使用 Hugo 建製靜態網站</title><link>https://www.ian-yeh.com/posts/%E4%BD%BF%E7%94%A8-hugo-%E5%BB%BA%E8%A3%BD%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/</link><guid isPermaLink="true">https://www.ian-yeh.com/posts/%E4%BD%BF%E7%94%A8-hugo-%E5%BB%BA%E8%A3%BD%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/</guid><pubDate>Fri, 25 Jun 2021 10:47:00 +0800</pubDate><author>iansrc0811@gmail.com (ian-yeh)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>終於弄好了自己的 blog~~&lt;br>
+比較幾個靜態網頁的框架，最後選擇了 Hugo&lt;br>
+以下就說明一下怎麼安裝囉&lt;/p>
+&lt;h2 id="安裝">安裝&lt;/h2>
+&lt;p>&lt;a href="https://gohugo.io/getting-started/quick-start/">參考 Hugo 官網&lt;/a>&lt;/p>
+&lt;h3 id="安裝只要用-homebrew-就可以安裝">安裝只要用 Homebrew 就可以安裝&lt;/h3>
+&lt;p>&lt;code>brew install hugo&lt;/code>&lt;/p>
+&lt;h3 id="在想要的目錄下建立-hugo-專案">在想要的目錄下建立 Hugo 專案&lt;/h3>
+&lt;p>&lt;code>hugo new site new_blog&lt;/code>&lt;/p>
+&lt;h3 id="安裝主題">安裝主題&lt;/h3>
+&lt;p>我使用的是 &lt;a href="https://themes.gohugo.io/hugo-theme-meme/">Meme&lt;/a>&lt;br>
+進到剛剛建立的 folder 中 (new_blog)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git init
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git submodule add --depth &lt;span class="m">1&lt;/span> https://github.com/reuixiy/hugo-theme-meme.git themes/meme
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>補充說明:&lt;/p>
+&lt;p>有一個主要的設定需要複製到 &lt;code>themes&lt;/code> 資料夾之外&lt;/p>
+&lt;p>&lt;code>rm config.toml &amp;amp;&amp;amp; cp themes/meme/config-examples/zh-tw/config.toml config.toml&lt;/code>&lt;/p>
+&lt;p>其餘較細結設定可參考 &lt;a href="https://themes.gohugo.io/hugo-theme-meme/">Meme 官網&lt;/a>，不同的主題也會有不同的設定方式&lt;br>
+在試這些設定也是滿好玩的&lt;/p>
+&lt;p>安裝主題這邊可能比較困惑的點是，在 &lt;code>themes&lt;/code> 資料夾中會有一個 &lt;code>exampleSite&lt;/code>&lt;br>
+這個可以不必理會&lt;/p>
+&lt;p>還有一些設定檔也應該要搬到 &lt;code>themes&lt;/code> 之外的地方做設定，&lt;br>
+只要知道不應該去修改 &lt;code>themes&lt;/code> 中的設定，設定應該都要在 &lt;code>themes&lt;/code> 以外的地方&lt;/p>
+&lt;h2 id="發佈新文章">發佈新文章&lt;/h2>
+&lt;p>&lt;code>hugo new &amp;quot;posts/new post.md&amp;quot;&lt;/code>&lt;/p>
+&lt;p>會產生 &lt;code>new post&lt;/code> 這個 .md 檔&lt;br>
+內容如下&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-marddown" data-lang="marddown">---
+title: &amp;#34;My First Post&amp;#34;
+date: 2019-03-26T08:47:11+01:00
+draft: true
+---
+&lt;/code>&lt;/pre>&lt;p>這個設定是可以客製化的，可以新增很多 key&lt;br>
+詳細可以參考 &lt;a href="https://gohugo.io/content-management/front-matter/">Hugo 官網的 front-matter&lt;/a>&lt;br>
+這個是每個文章的開頭格式，接下來才是自己要寫的內容。&lt;/p>
+&lt;p>記得 draft 要改成 false 才能在網頁上看得到文章&lt;br>
+但是在 local 開機的時候 draft false 也會顯示&lt;/p>
+&lt;h2 id="在本地開啟">在本地開啟&lt;/h2>
+&lt;p>最後只要&lt;br>
+&lt;code>hugo server -D&lt;/code>&lt;br>
+就可以在瀏覽器打開頁面了
+不得不說 Hugo 的編譯速度真的很快💯&lt;/p>
+&lt;h2 id="自定網域">自定網域&lt;/h2>
+&lt;p>由於可能會想用自己的 domain 而不是 Github Page 預設的網址，&lt;/p>
+&lt;p>所以會需要在 &lt;a href="https://www.namecheap.com/">Namecheam&lt;/a> 等網站設定 CNAME，&lt;br>
+然後要在專案 root 建立一個名叫 &lt;code>CNAME&lt;/code> 的檔案&lt;br>
+裡面只需要存網域名 &lt;code>www.CUSTOMER_DOMAIN.XXX&lt;/code>&lt;/p>
+&lt;p>但如果跟我一樣用 github action 自動部屬，就可以略過此步驟，見下一段說明&lt;/p>
+&lt;h2 id="自動佈署">自動佈署&lt;/h2>
+&lt;p>這樣的設定讓我只要推 development branch，Github 就會佈署一個版本到 master&lt;/p>
+&lt;p>會先編好一個靜態資源到 public 資料夾下&lt;/p>
+&lt;p>&lt;code>.github/workflows/gh-pages.yml&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">github pages&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="l">development &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Set a branch to deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">pull_request&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-20.04&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">submodules&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Fetch Hugo themes (true OR recursive)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="c"># fetch-depth: 1 # Fetch all history for .GitInfo and .Lastmod&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup Hugo&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-hugo@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">hugo-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;latest&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="c"># extended: true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Clean public&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">rm -rf public/*&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Build&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">hugo --minify&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-gh-pages@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">github_token&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.GITHUB_TOKEN }}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_dir&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">./public&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_branch&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">master&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">force_orphan&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">cname&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;www.ian-yeh.com&amp;#39;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 佈署時會產生 CNAME 檔&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c"># https://dwye.dev/post/hugo-github-action/&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="改-favicon">改 Favicon&lt;/h2>
+&lt;p>&lt;img src="https://i.imgur.com/zdScqd9.png" alt="https://i.imgur.com/zdScqd9.png">&lt;/p>
+&lt;p>(就是那個小圖示)&lt;/p>
+&lt;p>找要想要的圖片，然後前往 &lt;a href="https://realfavicongenerator.net/">https://realfavicongenerator.net/&lt;/a> 生成相關圖示和檔案，&lt;br>
+下載後解壓&lt;/p>
+&lt;p>僅保留&lt;/p>
+&lt;ul>
+&lt;li>android-chrome-512x512.png&lt;/li>
+&lt;li>apple-touch-icon.png&lt;/li>
+&lt;li>mstile-150x150.png&lt;/li>
+&lt;li>safari-pinned-tab.svg&lt;/li>
+&lt;li>favicon.ico&lt;/li>
+&lt;li>site.webmanifest&lt;/li>
+&lt;/ul>
+&lt;p>這些檔案，刪除其他的&lt;br>
+然後將這些檔案移動到 &lt;code>static/icons/&lt;/code> 目錄下，&lt;/p>
+&lt;p>再將&lt;/p>
+&lt;ul>
+&lt;li>favicon.ico&lt;/li>
+&lt;li>site.webmanifest&lt;/li>
+&lt;/ul>
+&lt;p>移動到 &lt;code>static/&lt;/code> 目錄下，&lt;/p>
+&lt;p>最後將 site.webmanifest 重新命名為 &lt;code>manifest.json&lt;/code>&lt;/p>
+&lt;p>並檢查和修改相關內容&lt;/p>
+&lt;h2 id="hugo-server-跑不起來">Hugo server 跑不起來&lt;/h2>
+&lt;p>在別台電腦上 clone 專案後發現 hugo server 跑不起來&lt;/p>
+&lt;p>有以下的訊息&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">found no layout file &lt;span class="k">for&lt;/span> &lt;span class="s2">&amp;#34;html&amp;#34;&lt;/span> &lt;span class="k">for&lt;/span> kind &lt;span class="s2">&amp;#34;page&amp;#34;&lt;/span>: You should create a template file which matches Hugo Layouts Lookup Rules &lt;span class="k">for&lt;/span> this combination.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>這代表我們需要重新安裝我們的主題&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git submodule init
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git submodule update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>再跑一次 &lt;code>hugo server -D&lt;/code> 就正常囉&lt;/p>
+&lt;h2 id="參考">參考&lt;/h2>
+&lt;p>&lt;a href="https://www.notion.so/41cebe4eb9190a5c5e879fee5933beb1">https://gist.github.com/lisez/41cebe4eb9190a5c5e879fee5933beb1&lt;/a>&lt;br>
+&lt;a href="https://dwye.dev/post/hugo-github-action/">https://dwye.dev/post/hugo-github-action/&lt;/a>&lt;br>
+&lt;a href="https://kaiiiz.github.io/blog/hugo-with-github-actions/">https://kaiiiz.github.io/blog/hugo-with-github-actions/&lt;/a>&lt;/p></description><category domain="https://www.ian-yeh.com/categories/hugo/">HUGO</category><category domain="https://www.ian-yeh.com/tags/hugo/">HUGO</category></item></channel></rss>
