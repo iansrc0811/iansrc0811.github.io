@@ -169,6 +169,25 @@ jobs:
 
 並檢查和修改相關內容
 
+## Hugo server 跑不起來
+
+在別台電腦上 clone 專案後發現 hugo server 跑不起來
+
+有以下的訊息
+
+```bash
+found no layout file for "html" for kind "page": You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
+```
+
+這代表我們需要重新安裝我們的主題
+
+```bash
+git submodule init
+git submodule update
+```
+
+再跑一次 `hugo server -D` 就正常囉
+
 ## 參考
 
 [https://gist.github.com/lisez/41cebe4eb9190a5c5e879fee5933beb1](https://www.notion.so/41cebe4eb9190a5c5e879fee5933beb1)  
