@@ -332,7 +332,7 @@ siteLogo = "/icons/apple-touch-icon.png"
 # 說明：用於 JSON-LD、Open Graph
 
 # 站點的描述
-siteDescription = "一個前後端技術筆記，包含 Rails、Vue.js 和一些實用的知職分享"
+siteDescription = "一個前後端技術筆記，包含 Rails、Vue.js 和一些實用的知識分享"
 # 說明：用於 HTML 的頭部元資料、JSON-LD、
 #      Open Graph、Atom、RSS
 
